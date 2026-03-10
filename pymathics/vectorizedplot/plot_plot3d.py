@@ -84,6 +84,10 @@ class _Plot3D(Builtin):
         # 'MaxRecursion': '2',  # FIXME causes bugs in svg output see #303
     }
 
+    def contribute(self, definitions, is_pymodule=False):
+        print("contribute with ", type(self))
+        super().contribute(definitions, is_pymodule)
+
     def eval(
         self,
         functions,

@@ -31,8 +31,8 @@ try:
         ParametricPlot3D,
         SphericalPlot3D,
     )
-except ModuleNotFoundError:
-    print("module cannot be loaded...")
+except ModuleNotFoundError as e:
+    print("module cannot be loaded...", e)
     ALREADY_INSTALLED = True
 
 

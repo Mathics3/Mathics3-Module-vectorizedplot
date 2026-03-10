@@ -22,19 +22,12 @@ Showing something visually can be done in a number of ways:
 </ul>
 """
 
+from pymathics.vectorizedplot.plot_plot3d import (
+    ContourPlot3D,
+    ParametricPlot3D,
+    SphericalPlot3D,
+)
 from pymathics.vectorizedplot.version import __version__
-
-ALREADY_INSTALLED = True
-try:
-    from pymathics.vectorizedplot.plot_plot3d import (
-        ContourPlot3D,
-        ParametricPlot3D,
-        SphericalPlot3D,
-    )
-except ModuleNotFoundError as e:
-    print("module cannot be loaded...", e)
-    ALREADY_INSTALLED = True
-
 
 # To be recognized as an external mathics module, the following variable
 # is required:
@@ -50,16 +43,9 @@ sort_order = "mathics.builtin.plotting-graphing-and-drawing"
 
 
 __all__ = (
-    (
-        "ContourPlot3D",
-        "ParametricPlot3D",
-        "SphericalPlot3D",
-        "__version__",
-        "pymathics_version_data",
-    )
-    if ALREADY_INSTALLED
-    else (
-        "__version__",
-        "pymathics_version_data",
-    )
+    "ContourPlot3D",
+    "ParametricPlot3D",
+    "SphericalPlot3D",
+    "__version__",
+    "pymathics_version_data",
 )

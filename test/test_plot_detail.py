@@ -109,7 +109,11 @@ print(f"REF_DIR {REF_DIR}, ACT_DIR {ACT_DIR}")
 # either raise assertion error, or update reference file
 UPDATE_MODE = False
 
-session.evaluate('LoadModule["pymathics.vectorizedplot"]')
+check_evaluation(
+    'LoadModule["pymathics.vectorizedplot"]',
+    '"pymathics.vectorizedplot"',
+    "module not available.",
+)
 check_evaluation(
     "StringTake[ToString[?? ContourPlot3D],17]",
     '"\n  ContourPlot3D["',

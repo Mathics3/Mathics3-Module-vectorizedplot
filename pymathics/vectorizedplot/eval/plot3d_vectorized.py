@@ -10,9 +10,10 @@ import numpy as np
 from mathics.builtin.colors.color_internals import convert_color
 from mathics.core.evaluation import Evaluation
 from mathics.core.expression import Expression
-from mathics.core.symbols import strip_context
+from mathics.core.symbols import strip_context, Symbol
 from mathics.core.systemsymbols import (
-    SymbolAbsoluteThickness,
+    # TODO: uncomment me after adding this symbol to mathics.core.systemsymbols
+    #    SymbolAbsoluteThickness,
     SymbolEqual,
     SymbolFull,
     SymbolNone,
@@ -23,6 +24,10 @@ from mathics.timing import Timer
 
 from .colors import palette2, palette3, palette_color_directive
 from .util import GraphicsGenerator, compile_exprs
+
+
+# TODO: remove me after adding this symbol to mathics.core.systemsymbols
+SymbolAbsoluteThickness= Symbol("System`AbsoluteThickness")
 
 
 def make_surfaces(

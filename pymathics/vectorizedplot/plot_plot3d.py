@@ -12,7 +12,7 @@ A <url>:Surface plot:https://en.wikipedia.org/wiki/Plot_(graphics)#Surface_plot<
 
 import numpy as np
 
-from mathics.builtin.drawing import plot
+from pymathics.vectorizedplot import plot
 from mathics.builtin.drawing.graphics3d import Graphics3D
 from mathics.builtin.graphics import Graphics
 from mathics.builtin.options import filter_from_iterable, options_to_rules
@@ -112,10 +112,8 @@ class _Plot3D(Builtin):
                 default_plot_points = (1000,)
             elif isinstance(self, ContourPlot3D):
                 default_plot_points = (50, 50, 50)
-            elif plot.use_vectorized_plot:
-                default_plot_points = (200, 200)
             else:
-                default_plot_points = (7, 7)
+                default_plot_points = (200, 200)
             plot_options.plot_points = default_plot_points
 
         # supply apply_function which knows how to take the plot parameters

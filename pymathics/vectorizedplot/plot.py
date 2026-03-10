@@ -33,7 +33,8 @@ from mathics.core.systemsymbols import (
     SymbolStyle,
 )
 from mathics.eval.drawing.colors import COLOR_PALETTES, get_color_palette
-from pymathics.vectorizedplot.eval.drawing.plot import get_plot_range
+from pymathics.vectorizedplot.eval.plot import get_plot_range
+import pymathics.vectorizedplot.eval.plot3d_vectorized as plot_module
 from mathics.eval.nevaluator import eval_N
 
 # The vectorized plot function generates GraphicsComplex using NumericArray,
@@ -51,7 +52,6 @@ from mathics.eval.nevaluator import eval_N
 # depending on whether vectorized plot functions are enabled
 def get_plot_eval_function(cls):
     function_name = "eval_" + cls.__name__
-    plot_module = pymathics.vectorizedplot.eval.drawing.plot3d_vectorized
     fun = getattr(plot_module, function_name)
     return fun
 

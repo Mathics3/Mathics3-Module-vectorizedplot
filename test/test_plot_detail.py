@@ -86,7 +86,7 @@ except ImportError:
     pyodide = None  # noqa
 
 
-from test.helper import session
+from test.helper import session, check_evaluation
 
 from mathics.builtin.drawing import plot
 from mathics.core.expression import Expression
@@ -108,6 +108,9 @@ print(f"REF_DIR {REF_DIR}, ACT_DIR {ACT_DIR}")
 # determines action to take if actual and reference files differ:
 # either raise assertion error, or update reference file
 UPDATE_MODE = False
+
+session.evaluate('LoadModule["pymathics.vectorizedplot"]')
+# check_evaluation("?? ContourPlot3D", "aass", "module not loaded")
 
 
 def copy_file(dst_fn, src_fn):
@@ -378,6 +381,8 @@ def do_test_all(fns, names=None):
                 one_test(**parms)
 
 
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -386,7 +391,8 @@ if __name__ == "__main__":
     parser.add_argument("files", nargs="*", help="yaml test files")
     args = parser.parse_args()
     UPDATE_MODE = args.update
-
+    session.evaluate('LoadModule["pymathics.vectorizedplot"]')
+    
     try:
         if args.files:
             for fn in args.files:

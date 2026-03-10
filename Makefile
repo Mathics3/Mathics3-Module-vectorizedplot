@@ -9,6 +9,8 @@ PYTHON ?= python3
 PIP ?= pip3
 RM  ?= rm
 LANG = en
+PYTEST_OPTIONS ?=
+
 
 .PHONY: all build \
    check clean \
@@ -52,7 +54,7 @@ doctest:
 	MATHICS_CHARACTER_ENCODING="ASCII" $(PYTHON) -m mathics.docpipeline -l pymathics.vectorizedplot -c 'Mathics3 vectorizedplot Module' $o
 #: Run py.test tests. Use environment variable "o" for pytest options
 pytest:
-	MATHICS_CHARACTER_ENCODING="ASCII" py.test test $o
+	MATHICS_CHARACTER_ENCODING="ASCII" py.test test $(PYTEST_OPTIONS)
 
 
 

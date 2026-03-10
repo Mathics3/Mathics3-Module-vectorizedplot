@@ -11,8 +11,6 @@ A <url>:Surface plot:https://en.wikipedia.org/wiki/Plot_(graphics)#Surface_plot<
 """
 
 import numpy as np
-
-from pymathics.vectorizedplot import plot
 from mathics.builtin.drawing.graphics3d import Graphics3D
 from mathics.builtin.graphics import Graphics
 from mathics.builtin.options import filter_from_iterable, options_to_rules
@@ -21,6 +19,8 @@ from mathics.core.builtin import Builtin
 from mathics.core.convert.expression import to_mathics_list
 from mathics.core.evaluation import Evaluation
 from mathics.core.systemsymbols import Symbol, SymbolPlotRange, SymbolSequence
+
+from pymathics.vectorizedplot import plot
 
 # This tells documentation how to sort this module
 sort_order = "mathics.builtin.custom-plots"
@@ -176,13 +176,14 @@ class ComplexPlot3D(_Plot3D):
     >> ComplexPlot3D[(z^2 + 1)/(z^2 - 1), {z, -2 - 2 I, 2 + 2 I}]
      = ...
     """
+
     expected_args = 2
     graphics_class = Graphics3D
     many_functions = True
     num_plot_points = 2  # different from number of ranges
     options = _Plot3D.options3d | {"Mesh": "None"}
     summary_text = "plot one or more complex functions as a 3D surface"
-    
+
     def apply_function(self, function, names, us, vs):
         parms = {str(names[0]): us + vs * 1j}
         return us, vs, function(**parms)

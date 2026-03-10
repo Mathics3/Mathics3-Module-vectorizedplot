@@ -6,7 +6,6 @@ Color functions
 from typing import Optional
 
 import palettable
-
 from mathics.core.atoms import Integer0, Integer1, MachineReal, String
 from mathics.core.convert.expression import to_expression
 from mathics.core.element import BaseElement

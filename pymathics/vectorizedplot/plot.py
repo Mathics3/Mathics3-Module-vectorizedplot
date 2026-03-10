@@ -6,9 +6,7 @@ Plotting functions take a function as a parameter and data, often a range of \
 points, as another parameter, and plot or show the function applied to the data.
 """
 
-
 import palettable
-
 from mathics.builtin.graphics import Graphics
 from mathics.builtin.options import options_to_rules
 from mathics.core.atoms import Integer, Integer0, MachineReal, String
@@ -33,9 +31,10 @@ from mathics.core.systemsymbols import (
     SymbolStyle,
 )
 from mathics.eval.drawing.colors import COLOR_PALETTES, get_color_palette
-from pymathics.vectorizedplot.eval.plot import get_plot_range
-import pymathics.vectorizedplot.eval.plot3d_vectorized as plot_module
 from mathics.eval.nevaluator import eval_N
+
+import pymathics.vectorizedplot.eval.plot3d_vectorized as plot_module
+from pymathics.vectorizedplot.eval.plot import get_plot_range
 
 # The vectorized plot function generates GraphicsComplex using NumericArray,
 # which no consumer will currently understand. So lets make it opt-in for now.
@@ -43,9 +42,6 @@ from mathics.eval.nevaluator import eval_N
 # Set option such as $UseVectorizedPlot, and maybe a non-standard Plot3D option.
 # For now an env variable is simplest.
 # TODO: work out exactly how to deploy.
-
-
-
 
 
 # get the plot eval function for the given class,
@@ -197,7 +193,8 @@ class Histogram(Builtin):
 
         from math import ceil
 
-        from mpmath import ceil as mpceil, floor as mpfloor
+        from mpmath import ceil as mpceil
+        from mpmath import floor as mpfloor
 
         class Distribution:
             def __init__(self, data, n_bins):

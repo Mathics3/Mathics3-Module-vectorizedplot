@@ -9,7 +9,6 @@ from functools import lru_cache
 from typing import Callable
 
 import numpy as np
-
 from mathics.builtin.graphics import Graphics
 from mathics.core.attributes import A_HOLD_ALL, A_PROTECTED, A_READ_PROTECTED
 from mathics.core.builtin import Builtin
@@ -17,6 +16,7 @@ from mathics.core.convert.expression import to_mathics_list
 from mathics.core.evaluation import Evaluation
 from mathics.core.symbols import SymbolTrue
 from mathics.core.systemsymbols import SymbolLogPlot, SymbolPlotRange, SymbolSequence
+
 from pymathics.vectorizedplot.eval.drawing.plot import eval_Plot
 from pymathics.vectorizedplot.eval.drawing.plot_vectorized import eval_Plot_vectorized
 

@@ -28,7 +28,7 @@ ALREADY_INSTALLED = True
 try:
     from .plot_plot3d import ContourPlot3D, ParametricPlot3D, SphericalPlot3D
 except ModuleNotFoundError:
-    ALREADY_INSTALLED = False
+    ALREADY_INSTALLED = True
 
 
 # To be recognized as an external mathics module, the following variable

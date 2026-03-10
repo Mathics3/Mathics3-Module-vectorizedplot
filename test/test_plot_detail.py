@@ -86,7 +86,7 @@ except ImportError:
     pyodide = None  # noqa
 
 
-from test.helper import session, check_evaluation
+from test.helper import check_evaluation, session
 
 from mathics.builtin.drawing import plot
 from mathics.core.expression import Expression
@@ -109,8 +109,16 @@ print(f"REF_DIR {REF_DIR}, ACT_DIR {ACT_DIR}")
 # either raise assertion error, or update reference file
 UPDATE_MODE = False
 
-session.evaluate('LoadModule["pymathics.vectorizedplot"]')
-# check_evaluation("?? ContourPlot3D", "aass", "module not loaded")
+check_evaluation(
+    'LoadModule["pymathics.vectorizedplot"]',
+    '"pymathics.vectorizedplot"',
+    "module not available.",
+)
+check_evaluation(
+    "StringTake[ToString[?? ContourPlot3D],17]",
+    '"\n  ContourPlot3D["',
+    "module not loaded",
+)
 
 
 def copy_file(dst_fn, src_fn):
@@ -381,8 +389,6 @@ def do_test_all(fns, names=None):
                 one_test(**parms)
 
 
-
-
 if __name__ == "__main__":
     import argparse
 
@@ -392,7 +398,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     UPDATE_MODE = args.update
     session.evaluate('LoadModule["pymathics.vectorizedplot"]')
-    
+
     try:
         if args.files:
             for fn in args.files:

@@ -5,7 +5,6 @@ A graphical plot displays information about functions or points.
 """
 
 from abc import ABC
-from functools import lru_cache
 from typing import Callable
 
 import numpy as np
@@ -17,8 +16,7 @@ from mathics.core.evaluation import Evaluation
 from mathics.core.symbols import SymbolTrue
 from mathics.core.systemsymbols import SymbolLogPlot, SymbolPlotRange, SymbolSequence
 
-from pymathics.vectorizedplot.eval.drawing.plot import eval_Plot
-from pymathics.vectorizedplot.eval.drawing.plot_vectorized import eval_Plot_vectorized
+from pymathics.vectorizedplot.eval.plot_vectorized import eval_Plot_vectorized
 
 from . import plot
 
@@ -48,7 +46,7 @@ class _Plot(Builtin, ABC):
             "appropriate list of constraints."
         ),
     }
-
+    context = "System`"
     options = Graphics.options.copy()
     options.update(
         {
@@ -84,8 +82,6 @@ class _Plot(Builtin, ABC):
         # because ndarray is unhashable, and in any case probably isn't useful
         # TODO: does caching results in the classic case have demonstrable performance benefit?
         apply_function = self.apply_function
-        if not plot.use_vectorized_plot:
-            apply_function = lru_cache(apply_function)
         plot_options.apply_function = apply_function
 
         # TODO: PlotOptions has already regularized .functions to be a list
@@ -98,7 +94,7 @@ class _Plot(Builtin, ABC):
         plot_options.use_log_scale = self.use_log_scale
         plot_options.expect_list = self.expect_list
         if plot_options.plot_points is None:
-            default_plot_points = 1000 if plot.use_vectorized_plot else 57
+            default_plot_points = 1000
             plot_options.plot_points = default_plot_points
 
         # pass through the expanded plot_range options
@@ -110,7 +106,7 @@ class _Plot(Builtin, ABC):
             options[str(SymbolLogPlot)] = SymbolTrue
 
         # this will be either the vectorized or the classic eval function
-        eval_function = eval_Plot_vectorized if plot.use_vectorized_plot else eval_Plot
+        eval_function = eval_Plot_vectorized
         with np.errstate(all="ignore"):  # suppress numpy warnings
             graphics = eval_function(plot_options, options, evaluation)
         return graphics
@@ -188,6 +184,7 @@ class Plot(_Plot):
      = -Graphics-
     """
 
+    context = "System`"
     summary_text = "plot curves of one or more functions"
 
     def apply_function(self, f: Callable, x_value):

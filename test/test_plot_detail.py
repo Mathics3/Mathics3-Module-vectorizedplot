@@ -92,7 +92,6 @@ from mathics.builtin.drawing import plot
 from mathics.core.expression import Expression
 from mathics.core.symbols import Symbol
 from mathics.core.util import print_expression_tree
-from mathics.session import MathicsSession
 
 from .svg_outline import outline_svg
 

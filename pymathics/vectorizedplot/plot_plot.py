@@ -5,7 +5,6 @@ A graphical plot displays information about functions or points.
 """
 
 from abc import ABC
-from functools import lru_cache
 from typing import Callable
 
 import numpy as np

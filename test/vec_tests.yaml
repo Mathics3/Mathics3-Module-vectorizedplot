@@ -286,7 +286,7 @@ vec-doc-102:
 vec-doc-103:
     expr: Plot[Sin[x], {x,0,4 Pi}, Mesh->Full]
 vec-doc-105:
-    expr: Plot[SphericalBesselY[1, x], {x, 0, 10}]
+    expr: Plot[SphericalBesselY[1, x], {x, 0, 10}, PlotPoints->10]
 vec-doc-109:
     expr: Plot[Tan[x], {x, -6, 6}, Mesh->Full]
 vec-doc-110:
@@ -301,4 +301,3 @@ vec-doc-125:
     expr: PolarPlot[Abs[Cos[5t]], {t, 0, Pi}]
 vec-doc-128:
     expr: PolarPlot[{1, 1 + Sin[20 t] / 5}, {t, 0, 2 Pi}]
-    
